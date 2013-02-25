@@ -31,4 +31,5 @@ pl=hg purge --print
 sync=hg pull --update
 hge=thg log --fork $*
 vsx="%VS110COMNTOOLS%..\IDE\VWDExpress.exe" $*
+sublime="%ProgramFiles%\Sublime Text 2\sublime_text.exe" $*
 github="%APPDATA%\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"

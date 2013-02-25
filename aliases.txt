@@ -1,0 +1,34 @@
+alias=if '$1'=='' (doskey /macros) else (doskey /macros | findstr /i "^$1")
+n=notepad $*
+npp="%share%\Notepad++\notepad++.exe" $*
+pn="%share%\PNotepad\pn.exe" $*
+ds=dir /s /b $*
+fs=findstr /spin /a:4A $*
+.=start .
+..=pushd ..\$**
+>=pushd $**
+<=popd
+\=pushd %root%\$**
+root=pushd %root%\$** & echo You can also use '\' alias to go to root
+share=pushd %share%\$**
+src=pushd %src%\$**
+desktop=pushd %USERPROFILE%\Desktop\$**
+gac=pushd %SystemRoot%\Assembly && start .
+diff=%share%\odd\odd.exe $*
+diffuse=start /B diffuse.exe $*
+bcomp="%share%\Beyond Compare 3\bcompare.exe" $*
+vs=devenv $*
+vse=devenv /edit $*
+path=powershell -Command "&{$env:path.replace(';',[char]10)}"
+aliashelp=if '$1'=='' (type "%share%\aliases_help.txt") else (findstr /i "^$1" "%share%\aliases_help.txt")
+fn=for %I in ($**) do @echo %~fI
+fnd=for /d %I in ($**) do @echo %~fI
+repeat=for /l %I in (1,1,$1) do @$2 $3 $4 $5 $6 $7 $8 $9
+&=$* & if not ERRORLEVEL 1 (echo ---Command completed successfully) else (echo ---Command failed: %ERRORLEVEL%)
+hist=doskey /history | findstr /i "$*.*"
+sum=hg summary --remote
+pl=hg purge --print
+sync=hg pull --update
+hge=thg log --fork $*
+vsx="%VS110COMNTOOLS%..\IDE\VWDExpress.exe" $*
+github="%APPDATA%\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"

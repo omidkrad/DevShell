@@ -1,0 +1,36 @@
+alias	Lists available command aliases. Example: "alias s" lists all aliases starting with s.
+aliashelp	Shows help for the specified alias name. Example: aliashelp alias
+.	Opens explorer on the current path.
+path	Shows the environment PATH in a readable format.
+vse	Opens Visual Studio in edit mode. For example "vse project.csproj" opens the project file in editor instead of loading the project.
+vs	Runs Visual Studio IDE.
+diff	Compares files using the default diff tool
+diffuse	Compares files using Diffuse
+bcomp	Compares files using Beyond Compare diff tool
+\	Jumps to %root%. If an argument is passed, it will jump to that directory under %root%. Wildcards are also allowed. For example: "\ sha*" jumps to %root%\share
+root	Jumps to %root%. Short form is '\'.
+src	Jumps to %src%
+share	Jumps to %share%
+desktop	Jumps to desktop of current user profile. Tip: "desktop ..\doc" goes to user documents folder.
+gac	Opens Global Assembly Cache
+>	Pushes directory to the specified path. You can use wildcards in the path. Example: > dir1\dir*
+<	Pops directory
+..	Changes to the parent directory.
+fs	Find string using regular expression. See "findstr /?" for details. The second argument is the files to search. For example the following command searches all .cmd files recursively for lines that begin with "echo": fs "^echo" *.cmd
+ds	Lists files recursively using full paths. Specify a wildcard file name to search.
+n	Opens Notepad
+npp	Opens Notepad++
+pn	Opens Programer's Notepad
+fn	Lists full names of files in the current path. The argument can include wildcards.
+fnd	Lists full names of directories in the current path. The argument can include wildcards.
+repeat	Runs the specified command for n times. Use %I for counter. For example: repeat 5 (echo %I), Example 2: repeat 100 popd
+&	Runs a command verifying its exit code.
+hist	Shows the command history. For example "hist dir" shows all the recent commands that contain 'dir'.
+sum	HG - Shows a brief summary of the working directory state.
+pl	HG - Lists files that will be deleted by "hg purge" command.
+sync	HG - Pulls latest changes from the remote repository and updates the local copy.
+hge	Opens TortoiseHG Repository Explorer. Use "hge ." to list changes on current folder.
+vsx Visual Studio 2012 Express
+github GitHub for Windows
+
+  NOTE:	If there is an alias name that conflicts with a command you want to run, you can escape the alias by starting the command line with a space. Aliases also don't work in batch files.

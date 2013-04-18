@@ -20,7 +20,9 @@ set src=%root%\src
 cd /d %src%
 
 :: Setting path
-set GitPath=%UserProfile%\AppData\Local\GitHub\PortableGit_93e8418133eb85e81a81e5e19c272776524496c6
+pushd %UserProfile%\AppData\Local\GitHub\PortableGit_*
+set GitPath=%CD%
+popd
 path %path%;%share%;%share%\SysInternals;%GitPath%\cmd;%GitPath%\bin
 
 :: Import aliases

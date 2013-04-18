@@ -20,7 +20,8 @@ set src=%root%\src
 cd /d %src%
 
 :: Setting path
-path %path%;%share%;%share%\SysInternals
+set GitPath=%UserProfile%\AppData\Local\GitHub\PortableGit_93e8418133eb85e81a81e5e19c272776524496c6
+path %path%;%share%;%share%\SysInternals;%GitPath%\cmd;%GitPath%\bin
 
 :: Import aliases
 doskey /macrofile=%~dp0\aliases.txt

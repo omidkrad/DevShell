@@ -30,9 +30,10 @@ sum	HG - Shows a brief summary of the working directory state.
 pl	HG - Lists files that will be deleted by "hg purge" command.
 sync	HG - Pulls latest changes from the remote repository and updates the local copy.
 hge	Opens TortoiseHG Repository Explorer. Use "hge ." to list changes on current folder.
-vsx Visual Studio 2012 Express
+ise	PowerShell ISE
+vsx	Visual Studio 2012 Express
 sublime	Sublime Text
-github GitHub for Windows
+github	GitHub for Windows
 
 
   NOTE:	If there is an alias name that conflicts with a command you want to run, you can escape the alias by starting the command line with a space. Aliases also don't work in batch files.

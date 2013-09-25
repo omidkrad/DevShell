@@ -32,7 +32,7 @@ sync	HG - Pulls latest changes from the remote repository and updates the local 
 hge	Opens TortoiseHG Repository Explorer. Use "hge ." to list changes on current folder.
 ise	PowerShell ISE
 vsx	Visual Studio 2012 Express
-sublime	Sublime Text
+st	Sublime Text
 github	GitHub for Windows
 
 

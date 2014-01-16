@@ -5,7 +5,7 @@ endlocal enableextensions
 if ERRORLEVEL 1 echo Unable to enable extensions
 ::call "%VS100COMNTOOLS%..\..\VC\vcvarsall.bat" x86
 echo Setting environment for using Microsoft Visual Studio 2012 Tools.
-call "%VS110COMNTOOLS%\VsDevCmd.bat"
+call "%VS120COMNTOOLS%\VsDevCmd.bat"
 if ERRORLEVEL 1 echo Visual Studio 10 installation not found
 echo.
 
@@ -40,3 +40,6 @@ color 4f
 prompt --------------------------------------------------------------------------------$_$S[$P]$_$_$M$G$S
 
 set EnableNuGetPackageRestore=true
+
+doskey /exename=PowerShell.exe /macrofile=%~dp0\aliases-PS.txt
+PowerShell -NoLogo -MTA -NoExit -File %~dp0\Prompt.ps1

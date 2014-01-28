@@ -26,7 +26,7 @@ popd
 path %path%;%share%;%share%\SysInternals;%GitPath%\cmd;%GitPath%\bin
 
 :: Import aliases
-doskey /macrofile=%~dp0\aliases.txt
+::doskey /macrofile=%~dp0\aliases.txt
 echo Type 'alias' for list of command aliases
 echo Type 'aliashelp' for help on aliases
 echo.

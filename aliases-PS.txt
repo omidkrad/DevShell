@@ -35,5 +35,6 @@ ise=powershell_ise.exe $*
 vs10=& "C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.com" $*
 vs12=& "C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\devenv.com" $*
 vsx=& "$env:VS110COMNTOOLS..\IDE\VWDExpress.exe" $*
-st=& "$env:ProgramFiles\Sublime Text 3\sublime_text.exe" $*
+#st=& "$env:ProgramFiles\Sublime Text 3\sublime_text.exe" $*
 github=& "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"
+whereis=Where.exe $*

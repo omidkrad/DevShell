@@ -1,6 +1,6 @@
 $global:OriginalWindowTitle = $host.ui.rawui.WindowTitle;
 function prompt {
-	$host.ui.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + (get-location).Path;
+	$host.ui.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;
 	return "--------------------------------------------------------------------------------`n" +
 	       "PS [$($executionContext.SessionState.Path.CurrentLocation)]`n`n$('>' * ($nestedPromptLevel + 1)) "
 }
@@ -30,9 +30,8 @@ else {
 $env:Platform="AnyCPU"
 $env:Configuration="Debug"
 
-#ds=dir -Recurse -Filter $(if ('$*' -eq '') { '*' } else { '$*' }) | % FullName
-#dsr=dir -Recurse $* | % { '.' + $_.FullName.Substring((Get-Location).Path.Length) }
-function List-Files {
+
+function List-File {
     param(
         [Parameter(Mandatory=$false,
                    HelpMessage="Filename wildcard pattern", Position=0)]
@@ -56,7 +55,7 @@ function List-Files {
 
     dir -Recurse -Path $FilePath -Filter $FileName | % FullName | % {
         if ($Relative) {
-            % { '.' + $_.Substring((Get-Location).Path.Length) }
+            % { '.' + $_.Substring($PWD.Path.Length) }
         }
         else {
             $_
@@ -64,4 +63,4 @@ function List-Files {
     }
 }
 
-Set-Alias ds List-Files
+Set-Alias ds List-File

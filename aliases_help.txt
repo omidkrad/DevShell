@@ -7,8 +7,8 @@ vs	Runs Visual Studio IDE.
 diff	Compares files using the default diff tool
 diffuse	Compares files using Diffuse
 bcomp	Compares files using Beyond Compare diff tool
-\	Jumps to %root%. If an argument is passed, it will jump to that directory under %root%. Wildcards are also allowed. For example: "\ sha*" jumps to %root%\share
-root	Jumps to %root%. Short form is '\'.
+\	Jumps to %devRoot%. If an argument is passed, it will jump to that directory under %devRoot%. Wildcards are also allowed. For example: "\ sha*" jumps to %devRoot%\share
+devRoot	Jumps to %devRoot%. Short form is '\'.
 src	Jumps to %src%
 share	Jumps to %share%
 desktop	Jumps to desktop of current user profile. Tip: "desktop ..\doc" goes to user documents folder.

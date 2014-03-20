@@ -13,10 +13,10 @@ echo.
 set share=%~dp0
 set share=%share:~0,-1%
 
-set root=%share%\..
-for %%I in (%root%) do set root=%%~fI
+set devRoot=%share%\..
+for %%I in (%devRoot%) do set devRoot=%%~fI
 
-set src=%root%\src
+set src=%devRoot%\src
 cd /d %src%
 
 :: Setting path
@@ -31,7 +31,7 @@ echo Type 'alias' for list of command aliases
 echo Type 'aliashelp' for help on aliases
 echo.
 
-echo root=%root%
+echo devRoot=%devRoot%
 echo share=%share%
 echo src=%src%
 

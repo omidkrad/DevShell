@@ -1,4 +1,4 @@
-$global:OriginalWindowTitle = $host.ui.rawui.WindowTitle;
+#$global:OriginalWindowTitle = $host.ui.rawui.WindowTitle;
 
 function Open-CurrentFolder {
 	start .
@@ -64,7 +64,7 @@ Set-Alias ds List-File
 Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_*
 $env:PoshGitPath=$PWD
 
-# Some of the following is borrowsed from $env:PoshGitPath\profile.example.ps1
+# Some of the following is borrowed from $env:PoshGitPath\profile.example.ps1
 . {
     # Load posh-git module from current directory
     Import-Module .\posh-git
@@ -77,12 +77,12 @@ $env:PoshGitPath=$PWD
         $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
 
         # Set window title
-        $Host.UI.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;
+        #$Host.UI.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;
 	    
         # Prompt
         Write-Host `n$('-' * 80)"`n  $($PWD.ProviderPath)" -NoNewline
         Write-VcsStatus
-        Write-Host "`n$('>' * $nestedPromptLevel)" -NoNewline
+        Write-Host `n$('>' * $nestedPromptLevel) -NoNewline
 
         $global:LASTEXITCODE = $realLASTEXITCODE
         return "> "

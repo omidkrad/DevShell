@@ -1,9 +1,4 @@
 $global:OriginalWindowTitle = $host.ui.rawui.WindowTitle;
-function prompt {
-	$host.ui.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;
-	return "--------------------------------------------------------------------------------`n" +
-	       "PS [$($executionContext.SessionState.Path.CurrentLocation)]`n`n$('>' * ($nestedPromptLevel + 1)) "
-}
 
 function Open-CurrentFolder {
 	start .
@@ -64,3 +59,41 @@ function List-File {
 }
 
 Set-Alias ds List-File
+
+# Set up posh-git
+Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_*
+$env:PoshGitPath=$PWD
+
+# Some of the following is borrowsed from $env:PoshGitPath\profile.example.ps1
+. {
+    # Load posh-git module from current directory
+    Import-Module .\posh-git
+
+    # Set up a simple prompt, adding the git prompt parts inside git repos
+    function global:prompt {
+        $realLASTEXITCODE = $LASTEXITCODE
+
+        # Reset color, which can be messed up by Enable-GitColors
+        $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+
+        # Set window title
+        $Host.UI.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;
+	    
+        # Prompt
+        Write-Host `n$('-' * 80)"`n  $($PWD.ProviderPath)" -NoNewline
+        Write-VcsStatus
+        Write-Host "`n$('>' * $nestedPromptLevel)" -NoNewline
+
+        $global:LASTEXITCODE = $realLASTEXITCODE
+        return "> "
+    }
+
+    Enable-GitColors
+
+    Start-SshAgent -Quiet
+}
+
+Pop-Location
+
+#. $env:PoshGitPath\profile.example.ps1
+Write-Host `n posh-git module loaded. Run `'Get-Command -Module posh-git`' for commands.`n

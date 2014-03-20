@@ -60,6 +60,10 @@ function List-File {
 
 Set-Alias ds List-File
 
+function ShowAssemblyInfo([string]$Assembly) {
+    [reflection.assemblyname]::GetAssemblyName($Assembly) | fl
+}
+
 # Set up posh-git
 Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_*
 $env:PoshGitPath=$PWD

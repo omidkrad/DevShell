@@ -61,6 +61,7 @@ function List-File {
 Set-Alias ds List-File
 
 function ShowAssemblyInfo([string]$Assembly) {
+    $Assembly = (Get-Item $Assembly).FullName
     [reflection.assemblyname]::GetAssemblyName($Assembly) | fl
 }
 

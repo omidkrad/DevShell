@@ -60,16 +60,23 @@ function List-File {
 
 Set-Alias ds List-File
 
-function ShowAssemblyInfo([string]$Assembly) {
+function Show-AssemblyInfo([string]$Assembly) {
     $Assembly = (Get-Item $Assembly).FullName
     [reflection.assemblyname]::GetAssemblyName($Assembly) | fl
 }
+
+function Open-GitCommit([string]$commitSHA) {
+    start "https://github.com/finnav/FN10/commit/$commitSHA"
+}
+
+Set-Alias GitHub "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"
+Set-Alias whereis Where.exe
 
 # Set up posh-git
 Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_*
 $env:PoshGitPath=$PWD
 
-# Some of the following is borrowed from $env:PoshGitPath\profile.example.ps1
+# Partially borrowed from $env:PoshGitPath\profile.example.ps1
 . {
     # Load posh-git module from current directory
     Import-Module .\posh-git
@@ -100,5 +107,11 @@ $env:PoshGitPath=$PWD
 
 Pop-Location
 
-#. $env:PoshGitPath\profile.example.ps1
+Import-Module $PSScriptRoot\OneGet\OneGet.psd1
+
 Write-Host `n posh-git module loaded. Run `'Get-Command -Module posh-git`' for commands.`n
+ 
+#$env:PSModulePath += ";$env:devRoot\_powershell_modules"
+#
+## PowerShell Community Extensions
+#Import-Module Pscx

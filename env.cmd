@@ -4,7 +4,7 @@ echo.
 endlocal enableextensions
 if ERRORLEVEL 1 echo Unable to enable extensions
 ::call "%VS100COMNTOOLS%..\..\VC\vcvarsall.bat" x86
-echo Setting environment for using Microsoft Visual Studio 2012 Tools.
+echo Setting environment for using Microsoft Visual Studio 2013 Tools.
 call "%VS120COMNTOOLS%\VsDevCmd.bat"
 if ERRORLEVEL 1 echo Visual Studio 2013 installation not found
 echo.

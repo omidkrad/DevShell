@@ -107,8 +107,6 @@ $env:PoshGitPath=$PWD
 
 Pop-Location
 
-Import-Module $PSScriptRoot\OneGet\OneGet.psd1
-
 Write-Host `n posh-git module loaded. Run `'Get-Command -Module posh-git`' for commands.`n
  
 #$env:PSModulePath += ";$env:devRoot\_powershell_modules"

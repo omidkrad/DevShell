@@ -1,39 +1,41 @@
 @echo off
-@echo === Rad's Command Shell ===
+@echo === Developer's Command Shell ===
 echo.
 endlocal enableextensions
 if ERRORLEVEL 1 echo Unable to enable extensions
-::call "%VS100COMNTOOLS%..\..\VC\vcvarsall.bat" x86
 echo Setting environment for using Microsoft Visual Studio 2013 Tools.
-call "%VS120COMNTOOLS%\VsDevCmd.bat"
-if ERRORLEVEL 1 echo Visual Studio 2013 installation not found
+call "%VS120COMNTOOLS%..\..\VC\vcvarsall.bat" x64
+if ERRORLEVEL 1 echo ERROR: Visual Studio 2013 installation not found && goto :eof
 echo.
 
 :: Setting env vars, expanding to their fully qualified path names
-set share=%~dp0
-set share=%share:~0,-1%
+set Share=%~dp0
+set Share=%share:~0,-1%
 
-set devRoot=%share%\..
-for %%I in (%devRoot%) do set devRoot=%%~fI
+set DevRoot=%share%\..
+for %%I in (%DevRoot%) do set DevRoot=%%~fI
 
-set src=%devRoot%\src
-cd /d %src%
+set Tools=%DevRoot%\tools
+set Src=%DevRoot%\src
+cd /d %Src%
 
 :: Setting path
 pushd %UserProfile%\AppData\Local\GitHub\PortableGit_*
+if ERRORLEVEL 1 echo ERROR: PortableGit not found! Please install GitHub for Windows. && goto :eof
 set GitPath=%CD%
 popd
-path %path%;%share%;%share%\SysInternals;%GitPath%\cmd;%GitPath%\bin
+path %PATH%;%Share%;%Share%\SysInternals;%GitPath%\cmd;%GitPath%\bin
 
 :: Import aliases
-::doskey /macrofile=%~dp0\aliases.txt
+doskey /macrofile=%~dp0\aliases.txt
 echo Type 'alias' for list of command aliases
 echo Type 'aliashelp' for help on aliases
 echo.
 
-echo devRoot=%devRoot%
-echo share=%share%
-echo src=%src%
+echo DevRoot=%DevRoot%
+echo Share=%Share%
+echo Src=%Src%
+echo Tools=%Tools%
 
 title DevShell ^(Command Prompt^)
 color 4f
@@ -41,5 +43,6 @@ prompt -------------------------------------------------------------------------
 
 set EnableNuGetPackageRestore=true
 
-doskey /exename=PowerShell.exe /macrofile=%~dp0\aliases-PS.txt
+:: DOSKEY does not play well with PSReadLine module 
+::doskey /exename=PowerShell.exe /macrofile=%~dp0\aliases-PS.txt
 PowerShell -NoLogo -MTA -NoExit -File %~dp0\DevShell.PowerShell_profile.ps1

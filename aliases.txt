@@ -1,5 +1,5 @@
 alias=if '$1'=='' (doskey /macros) else (doskey /macros | findstr /i "^$1")
-aliashelp=if '$1'=='' (type "%share%\aliases_help.txt") else (findstr /i "^$1" "%share%\aliases_help.txt")
+aliashelp=if '$1'=='' (type "%shell%\aliases_help.txt") else (findstr /i "^$1" "%shell%\aliases_help.txt")
 .=start .
 ..=pushd ..\$**
 >=pushd $**
@@ -8,7 +8,7 @@ aliashelp=if '$1'=='' (type "%share%\aliases_help.txt") else (findstr /i "^$1" "
 &=$* & if not ERRORLEVEL 1 (echo ---Command completed successfully) else (echo ---Command failed: %ERRORLEVEL%)
 repeat=for /l %I in (1,1,$1) do @$2 $3 $4 $5 $6 $7 $8 $9
 devRoot=pushd %devRoot%\$** & echo You can also use '\' alias to go to dev root
-share=pushd %share%\$**
+shell=pushd %shell%\$**
 src=pushd %src%\$**
 tools=pushd %tools%\$**
 desktop=pushd %USERPROFILE%\Desktop\$**
@@ -20,8 +20,8 @@ fnd=for /d %I in ($**) do @echo %~fI
 path=powershell -Command "&{$env:path.replace(';',[char]10)}"
 hist=doskey /history | findstr /i "$*.*"
 n=notepad $*
-npp="%share%\Notepad++\notepad++.exe" $*
-pn="%share%\PNotepad\pn.exe" $*
+npp="%tools%\Notepad++\notepad++.exe" $*
+pn="%tools%\PNotepad\pn.exe" $*
 diff=start /B diffuse.exe $*
 st="%ProgramFiles%\Sublime Text 3\sublime_text.exe" $*
 ise=powershell_ise.exe $*

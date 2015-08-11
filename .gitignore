@@ -1,1 +1,3 @@
-SysInternals/*
+tools/*
+!tools/Tools.txt
+!tools/SysInternals/UpdateSysInt.cmd

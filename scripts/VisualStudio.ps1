@@ -26,3 +26,4 @@ Set-Alias vs "${Env:ProgramFiles(x86)}\Microsoft Visual Studio 12.0\Common7\IDE\
 # MSBuild properties
 $env:Platform="AnyCPU"
 $env:Configuration="Debug"
+$env:EnableNuGetPackageRestore=true

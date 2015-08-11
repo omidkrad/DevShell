@@ -22,7 +22,7 @@ function Push-LocationToParent { Push-Location ..\$args }
 Set-Alias .. Push-LocationToParent
 Set-Alias `> Push-Location
 Set-Alias `< Pop-Location
-function \ { Push-Location $env:DevRoot\$args }
+function \ { Push-Location $env:DevRoot\$args } # example: '\ src' will jump to $env:Src
 Set-Alias / \ -Description 'Push location to `$env:DevRoot'
 
 function Open-GlobalAssemblyCache {
@@ -44,6 +44,8 @@ function Open-GitCommit([string]$commitSHA) {
 function fs { & findstr.exe /spin /a:4A $args }
 Set-Alias whereis Where.exe
 Set-Alias Path Get-PathVariable
+
+function Search-Google { start "https://google.com?#q=$args" }
 
 function Quote-String { "$args" }
 function Quote-List { $args }

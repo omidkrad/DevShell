@@ -1,30 +1,33 @@
 # DevShell PS Profile
 
-Write-Host "=== Developer's Command Shell ==="
-
-$MaximumHistoryCount = 1024
+Write-Host "=== Developer's PowerShell ==="
 
 if ($Host.Version.Major -lt 5)
 {
     Write-Warning "Please use PowerShell 5.0 or newer."
 }
 
-function Set-DevRootEnvVars([string]$path)
-{
-    $env:DevRoot = Get-Item $path
-    $env:Share = Get-Item $env:DevRoot\share
-    $env:Src = Get-Item $env:DevRoot\src
-    $env:Tools = Get-Item $env:DevRoot\tools
-}
+$MaximumHistoryCount = 1024
 
-Set-DevRootEnvVars -path $PSScriptRoot\..
-Add-PathVariable $env:Share, $env:Share\SysInternals
+$env:Shell = Get-Item $PSScriptRoot
+$env:DevRoot = Get-Item $PSScriptRoot\..
+$env:Src = Get-Item $env:DevRoot\src
+$env:Tools = Get-Item $env:Shell\tools
 
 New-PSDrive -Name Dev -PSProvider FileSystem -Root $env:DevRoot | Out-Null
 Set-Location Dev:\src
 
-# dot-source all profile scripts
-Get-ChildItem $PSScriptRoot\scripts\*.ps1 | sort -Property Name | foreach { 
-    Write-Debug "Loading:`t$($_.Name)"
+# Import all profile scripts
+$private:ScriptFiles = Get-ChildItem $PSScriptRoot\scripts\*.ps[123]
+$ScriptFiles | sort -Property Name | foreach { $private:i = 0 } {
+    [int]$private:percent = (100 * $i++ / $ScriptFiles.Length)
+    Write-Progress -activity "Loading Modules ($percent%)" -Status "$($_.Name)" -PercentComplete $percent;
     . $_
+}
+
+# Set-up SysInternals
+$private:SysInternalsPath = Get-Item $env:Tools\SysInternals
+Add-PathVariable $SysInternalsPath
+if (not-exist $SysInternalsPath\*.exe) {
+    & $SysInternalsPath\UpdateSysInt.cmd
 }

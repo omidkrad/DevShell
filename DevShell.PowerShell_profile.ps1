@@ -19,8 +19,10 @@ Set-Location Dev:\src
 
 # Import all profile scripts
 $private:ScriptFiles = Get-ChildItem $PSScriptRoot\scripts\*.ps[123]
-$ScriptFiles | sort -Property Name | foreach { $private:i = 0 } {
-    [int]$private:percent = (100 * $i++ / $ScriptFiles.Length)
+$private:ScriptFilesTotalSize = ($ScriptFiles | Measure-Object -Sum Length).Sum
+$ScriptFiles | sort -Property Name | foreach { $private:size = 0 } {
+    $size += $_.Length
+    [int]$private:percent = 100 * $size / $ScriptFilesTotalSize
     Write-Progress -activity "Loading Modules ($percent%)" -Status "$($_.Name)" -PercentComplete $percent;
     . $_
 }

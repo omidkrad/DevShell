@@ -7,6 +7,7 @@ if ($Host.Version.Major -lt 5)
     Write-Warning "Please use PowerShell 5.0 or newer."
 }
 
+Set-PSDebug -Strict
 $MaximumHistoryCount = 1024
 
 $env:Shell = Get-Item $PSScriptRoot

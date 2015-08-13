@@ -8,7 +8,7 @@ if (!$PscxPackage) {
     Install-Package -Name Pscx -ProviderName PSModule
 }
 
-# exist and not-exist
-function not-exist($path) { -not (Test-Path $path) }
+# exist and notexist
+function notexist { -not (Test-Path $args) }
 Set-Alias !exit not-exist -Option "Constant, AllScope"
 Set-Alias exist Test-Path -Option "Constant, AllScope"

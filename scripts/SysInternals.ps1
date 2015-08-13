@@ -2,6 +2,6 @@
 
 $private:SysInternalsPath = Get-Item $env:Tools\SysInternals
 Add-PathVariable $SysInternalsPath
-if (not-exist $SysInternalsPath\*.exe) {
+if (notexist $SysInternalsPath\*.exe) {
     & $SysInternalsPath\UpdateSysInt.cmd
 }

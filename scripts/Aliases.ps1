@@ -15,6 +15,7 @@ Set-Alias new New-Object
 Set-Alias s Select-Object
 Set-Alias mo Measure-Object
 Set-Alias whereis Where.exe
+Set-Alias n notepad.exe
 Set-Alias Path Get-PathVariable
 
 function Quote-String { "$args" }

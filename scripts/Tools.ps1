@@ -2,8 +2,11 @@
 
 $private:UseTheseTools =
 {
-    Use-Tool NDepend VisualNDepend.exe
+    # Keep in alphabetical order
+    Use-Tool ConEmu ConEmu$(if ($Pscx:Is64BitProcess) {'64'}).exe
     Use-Tool LinqPad LinqPad.exe
+    Use-Tool NDepend VisualNDepend.exe
+    Use-Tool NotePad++ NotePad++.exe; Set-Alias npp NotePad++
 }
 
 function Use-Tool
@@ -38,4 +41,4 @@ function Use-Tool
 "@
 }
 
-& $UseTheseTools
+. $UseTheseTools

@@ -26,10 +26,3 @@ $ScriptFiles | sort -Property Name | foreach { $private:size = 0 } {
     Write-Progress -activity "Loading Modules ($percent%)" -Status "$($_.Name)" -PercentComplete $percent;
     . $_
 }
-
-# Set-up SysInternals
-$private:SysInternalsPath = Get-Item $env:Tools\SysInternals
-Add-PathVariable $SysInternalsPath
-if (not-exist $SysInternalsPath\*.exe) {
-    & $SysInternalsPath\UpdateSysInt.cmd
-}

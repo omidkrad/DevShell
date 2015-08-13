@@ -12,14 +12,18 @@ $MaximumHistoryCount = 1024
 
 $env:Shell = Get-Item $PSScriptRoot
 $env:DevRoot = Get-Item $PSScriptRoot\..
-$env:Src = Get-Item $env:DevRoot\src
-$env:Tools = Get-Item $env:Shell\tools
+
+# Set user configuration
+. $PSScriptRoot\scripts\_user.ps1
+
+if (!$env:Src) { $env:Src = Get-Item $env:DevRoot\src }
+if (!$env:Tools) { $env:Tools = Get-Item $env:Shell\tools }
 
 New-PSDrive -Name Dev -PSProvider FileSystem -Root $env:DevRoot | Out-Null
 Set-Location Dev:\src
 
 # Import all profile scripts
-$private:ScriptFiles = Get-ChildItem $PSScriptRoot\scripts\*.ps[123]
+$private:ScriptFiles = Get-ChildItem $PSScriptRoot\scripts\*.ps[123] -Exclude _user.ps1
 $private:ScriptFilesTotalSize = ($ScriptFiles | Measure-Object -Sum Length).Sum
 $ScriptFiles | sort -Property Name | foreach { $private:size = 0 } {
     $size += $_.Length

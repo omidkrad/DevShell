@@ -14,10 +14,25 @@ $env:Shell = Get-Item $PSScriptRoot
 $env:DevRoot = Get-Item $PSScriptRoot\..
 $private:ScriptsPath = "$env:Shell\scripts"
 
-# Set user configuration
+#region Backup and restore user file
 if (Test-Path $ScriptsPath\_user.ps1) {
-    . $ScriptsPath\_user.ps1
+    # Make a backup of user script in case the repository was reset
+    Copy-Item $ScriptsPath\_user.ps1 $env:Shell\.git
 }
+else {
+    if (Test-Path $env:Shell\.git\_user.ps1) {
+        # Restore user script
+        Copy-Item $env:Shell\.git\_user.ps1 $ScriptsPath -Verbose
+    }
+    else {
+        # Restore default user script
+        Copy-Item $ScriptsPath\_user.ps1.txt $ScriptsPath\_user.ps1
+    }
+}
+
+# Run user configuration
+. $ScriptsPath\_user.ps1
+#endregion
 
 if (!$env:Src) { $env:Src = Get-Item $env:DevRoot\src }
 if (!$env:Tools) { $env:Tools = Get-Item $env:Shell\tools }

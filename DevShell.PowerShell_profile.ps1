@@ -27,6 +27,7 @@ else {
     else {
         # Restore default user script
         Copy-Item $ScriptsPath\_user.ps1.txt $ScriptsPath\_user.ps1
+        Write-Host "Please modify '$ScriptsPath\_user.ps1' for user settings." -ForegroundColor Yellow
     }
 }
 

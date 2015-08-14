@@ -5,11 +5,11 @@ if (exist $SublimeTextPath) {
     Set-Alias st $SublimeTextPath
 }
 else {
-    $SublimeTextPath = "$env:Tools\Sublime Text*\sublime_text.exe";
+    $SublimeTextPath = "$env:ToolsDir\Sublime Text*\sublime_text.exe";
     if (exist $SublimeTextPath) {
         Set-Alias st (Get-Item $SublimeTextPath)
     }
     else {
-        Write-Debug "Sublime Text path not found."
+        Write-Debug "Sublime Text not found."
     }
 }

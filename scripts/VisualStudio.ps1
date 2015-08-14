@@ -17,12 +17,11 @@ foreach ($private:year in $VsVersionYears) {
     $index++;
 }
 
-# Use $DefaultVisualStudioVersion from user script
-if (exist Variable:DefaultVisualStudioVersion) {
-    $year = $DefaultVisualStudioVersion
+# Use user's configured Visual Studio version
+if ($UserSettings.DefaultVisualStudioVersion) {
+    $year = $UserSettings.DefaultVisualStudioVersion
     $ver = $VsVersionNumbers[[Array]::IndexOf($VsVersionYears, $year)]
     Set-Alias -Name vs -Value vs$($year-2000)
-    Remove-Variable DefaultVisualStudioVersion
 }
 
 Write-Host " Setting environment for using Microsoft Visual $year Studio Tools."

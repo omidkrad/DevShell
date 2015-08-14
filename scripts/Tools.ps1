@@ -19,11 +19,17 @@ function Use-Tool
         [Parameter(Mandatory=$true,
                    HelpMessage="Name of the executable file", Position=1)]
         [string] $Target
+
+        <#
+        [Parameter(Mandatory=$false,
+                   HelpMessage="List of installation paths to try", Position=1)]
+        [string[]] $InstallationPath
+        #>
     )
 
     Set-Item -Path Function:Global:$Name -Options "AllScope" -Value `
 @"
-    `$tool = Get-ChildItem -Recurse -Path `$env:Tools -Include $Target
+    `$tool = Get-ChildItem -Recurse -Path `$env:ToolsDir -Include $Target
     if (`$tool) {
         if (`$tool.Length -is [Array]) {
             Write-Error "Multiple targets found for $Target"
@@ -36,7 +42,7 @@ function Use-Tool
         }
     }
     else {
-        Write-Error "Could not find $Name under `$env:Tools"
+        Write-Error "Could not find $Name under `$env:ToolsDir"
     }
 "@
 }

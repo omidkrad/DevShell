@@ -1,4 +1,7 @@
 ﻿# User configuration
-# The _user.ps1 script, if exists, is run before other scripts.
+# The _user.ps1 script is run before other scripts
 
-$DefaultVisualStudioVersion = 2015
+$UserSettings = @{
+    ProjectPath = "Dev:\src\MyProject"
+    DefaultVisualStudioVersion = 2015
+}

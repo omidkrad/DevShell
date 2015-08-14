@@ -18,7 +18,7 @@ foreach ($private:year in $VsVersionYears) {
 }
 
 # Use $DefaultVisualStudioVersion from user script
-if ($DefaultVisualStudioVersion) {
+if (exist Variable:DefaultVisualStudioVersion) {
     $year = $DefaultVisualStudioVersion
     $ver = $VsVersionNumbers[[Array]::IndexOf($VsVersionYears, $year)]
     Set-Alias -Name vs -Value vs$($year-2000)

@@ -1,0 +1,4 @@
+﻿# User configuration
+# The _user.ps1 script, if exists, is run before other scripts.
+
+$DefaultVisualStudioVersion = 2015

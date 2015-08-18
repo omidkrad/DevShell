@@ -1,18 +1,28 @@
 ﻿# Sets Visual Studio aliases and environment variables
 
+if (notexist Env:\VS???COMNTOOLS) {
+    Write-Warning " Visual Studio installation not found. Skippied loading VS environment."
+    exit
+}
+
 Set-Alias vs devenv
 Set-Alias vsx $env:VSINSTALLDIR\Common7\IDE\VWDExpress.exe
 function vse { & devenv /edit $args }
 
 $private:VsVersionYears = @(2010, 2012, 2013, 2015)
 $private:VsVersionNumbers = @(10, 11, 12, 14)
-$private:index = 0 
-foreach ($private:year in $VsVersionYears) {
-    $private:ver = $VsVersionNumbers[$index]
-    $private:devenvPath = "${Env:ProgramFiles(x86)}\Microsoft Visual Studio $ver.0\Common7\IDE\devenv.com"
-    if (exist $devenvPath) {
-        Set-Alias -Name vs$($year-2000) -Value $devenvPath
-        Set-Alias -Name vs -Value $devenvPath
+$private:index = 0
+foreach ($private:ver in $VsVersionNumbers) {
+    $private:year = $VsVersionYears[$index]
+    $private:VsCommonTools = "Env:\VS$($ver)0COMNTOOLS"
+    if (exist $VsCommonTools) {
+        $private:devenvPath = Join-Path (Get-Item $VsCommonTools).Value "..\IDE\devenv.com"
+        $devenvPath = Resolve-Path $devenvPath
+        if (exist $devenvPath) {
+            Set-Alias -Name vs$($year-2000) -Value $devenvPath
+            # map default vs alias to the last available version
+            Set-Alias -Name vs -Value $devenvPath
+        }
     }
     $index++;
 }

@@ -1,4 +1,3 @@
 scripts/_user.ps1
-tools/*
-!tools/Tools.txt
+tools/**/*
 !tools/SysInternals/UpdateSysInt.cmd

@@ -1,6 +1,6 @@
 ﻿# Aliases and quick functions
 
-function Open-CurrentFolder { start . }
+function Open-CurrentFolder { start .\$args }
 Set-Alias .\ Open-CurrentFolder
 Set-Alias ./ Open-CurrentFolder
 

@@ -1,6 +1,6 @@
 ﻿function Find-String
 {
-    & findstr.exe /spin /a:4A "$args"
+    & findstr.exe /spin /a:A $args
 }
 Set-Alias fs Find-String
 

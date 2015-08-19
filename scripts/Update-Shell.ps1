@@ -1,12 +1,18 @@
 ﻿# Update DevShell
-Push-Location $env:ShellDir
-if (-not (Get-Command "git.exe" -ErrorAction SilentlyContinue))
+
+function Update-Shell
 {
-    Write-Warning "`n git not found in path`n"
+    Push-Location $env:ShellDir
+    if (-not (Get-Command "git.exe" -ErrorAction SilentlyContinue))
+    {
+        Write-Warning "`n git not found in path`n"
+        Pop-Location
+        exit 99
+    }
+    Write-Host " Updating DevShell:  " -NoNewline
+    git pull | Out-Host
+    Write-Host ""
     Pop-Location
-    exit 99
 }
-Write-Host " Updating DevShell:  " -NoNewline
-git pull | Out-Host
-Write-Host ""
-Pop-Location
+
+Update-Shell

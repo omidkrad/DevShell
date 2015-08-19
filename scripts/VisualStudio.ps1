@@ -17,8 +17,8 @@ foreach ($private:ver in $VsVersionNumbers) {
     $private:VsCommonTools = "Env:\VS$($ver)0COMNTOOLS"
     if (exist $VsCommonTools) {
         $private:devenvPath = Join-Path (Get-Item $VsCommonTools).Value "..\IDE\devenv.com"
-        $devenvPath = Resolve-Path $devenvPath
         if (exist $devenvPath) {
+            $devenvPath = Resolve-Path $devenvPath
             Set-Alias -Name vs$($year-2000) -Value $devenvPath
             # map default vs alias to the last available version
             Set-Alias -Name vs -Value $devenvPath

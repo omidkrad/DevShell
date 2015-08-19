@@ -40,4 +40,4 @@ Import-VisualStudioVars "$($ver)0"
 # MSBuild properties
 $env:Platform="AnyCPU"
 $env:Configuration="Debug"
-$env:EnableNuGetPackageRestore=true
+$env:EnableNuGetPackageRestore=$true

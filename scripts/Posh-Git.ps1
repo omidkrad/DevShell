@@ -1,6 +1,11 @@
 ﻿# Sets up Posh-Git and Prompt
 
-Push-Location $env:USERPROFILE\AppData\Local\GitHub\PortableGit_*
+Push-Location $env:USERPROFILE\AppData\Local\GitHub\PortableGit_* -ErrorAction SilentlyContinue
+if (!$?) {
+    Write-Warning "`n posh-git not found. Skipped loading posh-git module.`n"
+    Pop-Location
+    exit 99
+}
 $env:GitPath = Get-Location
 Pop-Location
 
@@ -41,4 +46,4 @@ Start-SshAgent -Quiet
 #endregion
 
 Pop-Location
-Write-Host `n posh-git module loaded. Run `'Get-Command -Module posh-git`' for commands.`n
+Write-Host "`n posh-git module loaded. Run `'Get-Command -Module posh-git`' for commands.`n"

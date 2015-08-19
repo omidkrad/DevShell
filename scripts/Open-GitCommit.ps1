@@ -5,7 +5,11 @@
         $url = "$origin/commit/$commitSHA"
     }
     else {
-        $url = "$origin/commits/"
+        $branch = ""
+        if (Get-Command Get-GitStatus -Module posh-git) {
+            $branch = (Get-GitStatus).Branch
+        }
+        $url = "$origin/commits/$branch"
     }
     Write-Host "Opening: $url"
     start $url

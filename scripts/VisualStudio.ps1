@@ -6,7 +6,8 @@ if (notexist Env:\VS???COMNTOOLS) {
 }
 
 Set-Alias vs devenv
-Set-Alias vsx $env:VSINSTALLDIR\Common7\IDE\VWDExpress.exe
+Set-Alias vsx "$env:VSINSTALLDIR\Common7\IDE\VWDExpress.exe"
+Set-Alias vsl "${env:CommonProgramFiles(x86)}\Microsoft Shared\MSEnv\VSLauncher.exe"
 function vse { & devenv /edit $args }
 
 $private:VsVersionYears = @(2010, 2012, 2013, 2015)
@@ -16,7 +17,7 @@ foreach ($private:ver in $VsVersionNumbers) {
     $private:year = $VsVersionYears[$index]
     $private:VsCommonTools = "Env:\VS$($ver)0COMNTOOLS"
     if (exist $VsCommonTools) {
-        $private:devenvPath = Join-Path (Get-Item $VsCommonTools).Value "..\IDE\devenv.com"
+        $private:devenvPath = Join-Path (Get-Content $VsCommonTools) "..\IDE\devenv.com"
         if (exist $devenvPath) {
             $devenvPath = Resolve-Path $devenvPath
             Set-Alias -Name vs$($year-2000) -Value $devenvPath

@@ -23,7 +23,7 @@
 
     dir -Recurse -Path $FilePath -Filter $FileName | % FullName | % {
         if ($Relative) {
-            % { '.' + $_.Substring($PWD.Path.Length) }
+            % { '.' + $_.Substring($PWD.ProviderPath.Length) }
         }
         else {
             $_
@@ -32,4 +32,4 @@
 }
 
 Set-Alias ds List-File
-function dsr { List-File -Relative $args }
+function dsr { List-File "$args" -Relative }

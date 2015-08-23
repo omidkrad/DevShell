@@ -4,11 +4,11 @@ function Open-CurrentFolder { start .\$args }
 Set-Alias .\ Open-CurrentFolder
 Set-Alias ./ Open-CurrentFolder
 
-function Push-LocationToParent { Push-Location ..\$args }
+function Push-LocationToParent { Push-Location ..\$args* }
 Set-Alias .. Push-LocationToParent
 Set-Alias `> Push-Location
 Set-Alias `< Pop-Location
-function \ { Push-Location $env:DevRoot\$args } # example: '\ src' will jump to $env:Src
+function \ { Push-Location $env:DevRoot\$args* } # example: '\ src' will jump to $env:Src
 Set-Alias / \ -Description 'Push location to `$env:DevRoot'
 
 Set-Alias new New-Object

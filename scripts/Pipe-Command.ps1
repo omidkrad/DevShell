@@ -24,7 +24,8 @@ function Pipe-Command
     }
 	PROCESS
     {
-        $QuotedPath = "`"$($file.FullName)`""
+        $fullName = Get-Item $file | select -ExpandProperty FullName
+        $QuotedPath = "`"$fullName`""
         if ($Command -cmatch ' _ ') {
             $CommandToRun = $Command.Replace(' _ ', " $QuotedPath ")
         }

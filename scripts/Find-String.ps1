@@ -14,7 +14,8 @@ function Find-String
         [switch]$PrintLineNumber = $true,
         [switch]$PrintSeekOffset,
         [switch]$FileNamesOnly,
-        [switch]$AsRegEx
+        [switch]$AsRegEx,
+        [switch]$ExcludeExternals = $true
     )
     $switches = ''
     if ($Recurse) { $switches += 's' }
@@ -27,7 +28,42 @@ function Find-String
     if ($FileNamesOnly) { $switches += 'm' }
     if ($AsRegEx) { $switches += 'r' }
     if ($switches) { $switches = '/' + $switches }
-    & findstr.exe /a:A $switches /c:"$SearchString" $Files
+
+    $path = Split-Path -Parent -Path $Files
+    $pattern = Split-Path -Leaf -Path $Files
+
+    Push-Location $path
+
+    try
+    {
+        if (!$ExcludeExternals -or !$Recurse)
+        {
+            & findstr.exe /a:A $switches /c:"$SearchString" .\$pattern
+        }
+        else
+        {
+            $ExcludeList = @(
+                ".git"
+                "bin"
+                "jspm_packages"
+                "node_modules"
+                "packages"
+            )
+
+            # Search current directory
+            & findstr.exe /a:A $($switches.Replace('s','')) /c:"$SearchString" .\$pattern
+
+            # Search each subdirectory not in the exclude list
+            Get-ChildItem -Directory -Exclude $ExcludeList | foreach {
+                & findstr.exe /a:A $switches /c:"$SearchString" .\$($_.Name)\$pattern
+            }
+        }
+    }
+    finally
+    {
+        Pop-Location
+    }
+    
 }
 Set-Alias fs Find-String
 

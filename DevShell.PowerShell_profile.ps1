@@ -39,13 +39,14 @@ else {
 }
 #endregion
 
-# Run user configuration
+# Run user configuration first
 . $ScriptsDir\_user.ps1
 
 # Import all profile scripts
-$private:ScriptFiles = Get-ChildItem $ScriptsDir\*.ps[123] -Exclude _user.ps1
+$private:ScriptFiles = Get-ChildItem -Recurse $ScriptsDir\*.ps[123] -Exclude _user.ps1 |
+                       Sort-Object -Property  Directory, Name
 $private:ScriptFilesTotalSize = ($ScriptFiles | Measure-Object -Sum Length).Sum
-$ScriptFiles | sort -Property Name | foreach { $private:size = 0 } {
+$ScriptFiles | foreach { $private:size = 0 } {
     $size += $_.Length
     [int]$private:percent = 100 * $size / $ScriptFilesTotalSize
     Write-Progress -activity "Loading Modules ($percent%)" -Status "$($_.Name)" -PercentComplete $percent;

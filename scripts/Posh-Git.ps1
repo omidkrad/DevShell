@@ -26,7 +26,7 @@ function global:prompt
     $realLASTEXITCODE = $LASTEXITCODE
 
     # Reset color, which can be messed up by Enable-GitColors
-    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
+    [Console]::ResetColor()
 
     # Set window title
     #$Host.UI.rawui.WindowTitle = $global:OriginalWindowTitle + ' - ' + $PWD;

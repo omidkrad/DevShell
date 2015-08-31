@@ -10,7 +10,7 @@ function Update-Shell
         exit 99
     }
     Write-Host " Updating DevShell:  " -NoNewline
-    git pull | Out-Host
+    git pull --rebase | Out-Host
     Write-Host ""
     Pop-Location
 }

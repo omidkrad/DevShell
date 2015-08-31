@@ -5,3 +5,9 @@ $UserSettings = @{
     ProjectPath = "Dev:\src\MyProject"
     DefaultVisualStudioVersion = 2015
 }
+
+function Set-ProjectPath([IO.DirectoryInfo] $path)
+{
+    $UserSettings.ProjectPath = $path.FullName
+    Push-Location $path
+}

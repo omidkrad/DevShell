@@ -7,6 +7,7 @@ $private:UseTheseTools =
     Use-Tool LinqPad LinqPad.exe
     Use-Tool NDepend VisualNDepend.exe
     Use-Tool NotePad++ NotePad++.exe; Set-Alias npp NotePad++
+    Use-Tool WinMerge WinMergePortable.exe; Set-Alias Diff-Path WinMerge
 }
 
 function Use-Tool

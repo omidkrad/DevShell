@@ -8,6 +8,12 @@ $UserSettings = @{
 
 function Set-ProjectPath([IO.DirectoryInfo] $path)
 {
+    $path = Get-Item $path
     $UserSettings.ProjectPath = $path.FullName
     Push-Location $path
+}
+
+function Get-ProjectPath
+{
+    $UserSettings.ProjectPath
 }

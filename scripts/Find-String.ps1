@@ -44,7 +44,10 @@ function Find-String
         {
             $ExcludeList = @(
                 ".git"
+                ".idea"
                 "bin"
+                "bower_components"
+                "dist"
                 "jspm_packages"
                 "node_modules"
                 "packages"

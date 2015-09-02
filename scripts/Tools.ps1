@@ -30,7 +30,7 @@ function Use-Tool
 
     Set-Item -Path Function:Global:$Name -Options "AllScope" -Value `
 @"
-    `$tool = Get-ChildItem -Recurse -Path `$env:ToolsDir -Include $Target
+    `$tool = Get-ChildItem -Recurse -Path `$env:ToolsDir -Include $Target | sort -Property FileVersion | select -first 1
     if (`$tool) {
         if (`$tool.Length -is [Array]) {
             Write-Error "Multiple targets found for $Target"

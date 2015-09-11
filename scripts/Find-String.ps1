@@ -54,7 +54,9 @@ function Find-String
             )
 
             # Search current directory
-            & findstr.exe /a:A $($switches.Replace('s','')) /c:"$SearchString" .\$pattern
+            if (Test-Path .\$pattern) {
+                & findstr.exe /a:A $($switches.Replace('s','')) /c:"$SearchString" .\$pattern
+            }
 
             # Search each subdirectory not in the exclude list
             Get-ChildItem -Directory -Exclude $ExcludeList | foreach {

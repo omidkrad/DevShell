@@ -8,6 +8,7 @@ if (notexist Env:\VS???COMNTOOLS) {
 Set-Alias vs devenv
 Set-Alias vsx "$env:VSINSTALLDIR\Common7\IDE\VWDExpress.exe"
 Set-Alias vsl "${env:CommonProgramFiles(x86)}\Microsoft Shared\MSEnv\VSLauncher.exe"
+Set-Alias dnvm dnvm.cmd
 function vse { & devenv /edit $args }
 
 $private:VsVersionYears = @(2010, 2012, 2013, 2015)

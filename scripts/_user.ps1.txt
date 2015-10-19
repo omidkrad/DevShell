@@ -17,3 +17,5 @@ function Get-ProjectPath
 {
     $UserSettings.ProjectPath
 }
+
+Add-PathVariable $env:ShellDir\scripts-bin

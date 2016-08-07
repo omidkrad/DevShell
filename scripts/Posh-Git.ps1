@@ -40,8 +40,6 @@ function global:prompt
     return "> "
 }
 
-Enable-GitColors
-
 Start-SshAgent -Quiet
 #endregion
 

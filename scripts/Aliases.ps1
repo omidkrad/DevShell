@@ -22,3 +22,5 @@ function Quote-String { "$args" }
 function Quote-List { $args }
 Set-Alias qs Quote-String
 Set-Alias ql Quote-List
+
+Set-Alias my Open-MyFolder

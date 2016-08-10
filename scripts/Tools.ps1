@@ -10,6 +10,17 @@ $private:UseTheseTools =
     Use-Tool WinMerge WinMergePortable.exe; Set-Alias Diff-Path WinMerge
 }
 
+<#
+.Synopsis
+   Creates a lazy-loaded alias to the specified executable or command tool.
+.DESCRIPTION
+   Creates a lazy-loaded alias to the specified executable or command tool.
+   For lazy-loading, it first creates a function with the specified name which
+   will search for the executable file under tools path. The first time
+   the function is called, it will do the search and if successful will
+   set an alias to the executable file with fixed path so no file search is done
+   in subsequent calls to that alias. 
+#>
 function Use-Tool
 {
     param(
@@ -32,7 +43,7 @@ function Use-Tool
 @"
     `$tool = Get-ChildItem -Recurse -Path `$env:ToolsDir -Include $Target | sort -Property FileVersion | select -first 1
     if (`$tool) {
-        if (`$tool.Length -is [Array]) {
+        if (`$tool -is [Array]) {
             Write-Error "Multiple targets found for $Target"
             `$tool | % { `$_.FullName }
         }

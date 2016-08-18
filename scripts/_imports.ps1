@@ -9,6 +9,9 @@ if (!$PscxPackage) {
 }
 
 # exist and notexist
-function notexist { -not (Test-Path $args) }
-Set-Alias !exit not-exist -Option "Constant, AllScope"
-Set-Alias exist Test-Path -Option "Constant, AllScope"
+if (-not (Test-Path Alias:exist))
+{
+    function notexist { -not (Test-Path $args) }
+    Set-Alias !exit not-exist -Option "Constant, AllScope"
+    Set-Alias exist Test-Path -Option "Constant, AllScope"
+}

@@ -17,3 +17,5 @@ Install-Package ConEmu -source chocolatey
   - Set it as Default shell
 - Under **Settings > Startup > Specified named task** select `{DevShell}` 
 - Save settings and Pin ConEmu to Task Bar
+
+> **Tip:** When you open DevShell, press **Ctrl**+**Shift**+**E** to open a second shell on the side.

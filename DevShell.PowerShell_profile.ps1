@@ -55,11 +55,19 @@ else {
 }
 #endregion
 
+# Create user scripts folder
+$private:UserScriptsDir = "$ScriptsDir\user"
+if (-not (Test-Path $UserScriptsDir)) {
+    mkdir $UserScriptsDir | Out-Null
+    "Add your user-specific scripts in this folder to load when the shell starts." |
+        Out-File $UserScriptsDir\readme.txt
+}
+
 # Run user configuration first
 . $ScriptsDir\_user.ps1
 
 # Import all profile scripts
-$private:ScriptFiles = Get-ChildItem -Recurse $ScriptsDir\*.ps[123], $env:ShellDir\user\*.ps[123] -Exclude _user.ps1 |
+$private:ScriptFiles = Get-ChildItem -Recurse $ScriptsDir\*.ps[123] -Exclude _user.ps1 |
                        Sort-Object -Property  Directory, Name
 $private:ScriptFilesTotalSize = ($ScriptFiles | Measure-Object -Sum Length).Sum
 $ScriptFiles | foreach { $private:size = 0 } {

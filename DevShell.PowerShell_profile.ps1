@@ -1,6 +1,22 @@
 # DevShell PS Profile
 
-Write-Host "=== Developer's PowerShell ==="
+if (-not $CustomEmblem) {
+@"
+ Welcome to
+   ____              ____  _          _ _ 
+  |  _ \  _____   __/ ___|| |__   ___| | |
+  | | | |/ _ \ \ / /\___ \| '_ \ / _ \ | |
+  | |_| |  __/\ V /  ___) | | | |  __/ | |
+  |____/ \___| \_/  |____/|_| |_|\___|_|_|
+
+   ====== THE Developer PowerShell ======
+
+"@ # http://patorjk.com/software/taag/#p=display&f=Ivrit&t=DevShell
+}
+else
+{
+    Write-Output $CustomEmblem
+}
 
 if ($Host.Version.Major -lt 5)
 {

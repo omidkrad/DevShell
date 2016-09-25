@@ -19,3 +19,7 @@ Install-Package ConEmu -source chocolatey
 - Save settings and Pin ConEmu to Task Bar
 
 > **Tip:** When you open DevShell, press **Ctrl**+**Shift**+**E** to open a second shell on the side.
+
+# Tools
+- Visual Studio Code: https://code.visualstudio.com
+- [Notepad2-mod](https://github.com/XhmikosR/notepad2-mod/releases): Alias `n` in the shell opens notepad. We recommend running Notepad2-mod's executable setup that replaces notepad.

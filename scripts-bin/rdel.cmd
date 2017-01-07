@@ -4,8 +4,20 @@
 
 @echo off
 setlocal
+
+if '%1'=='' (
+	echo Error: No directories specified.
+	exit /b 1
+)
+if not exist "%1" (
+	echo Error: Directory '%1' does not exist.
+	exit /b 1
+)
+echo Delete '%1'?
+pause
+
 set emptyDir="%TEMP%\empty"
 mkdir %emptyDir%
-robocopy %emptyDir% %* /mir
-rm %emptyDir% -r
-rm %* -r
+robocopy %emptyDir% %1 /mir
+rd /s /q %emptyDir%
+rd /s /q %1

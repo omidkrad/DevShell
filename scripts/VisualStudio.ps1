@@ -11,8 +11,8 @@ Set-Alias vsl "${env:CommonProgramFiles(x86)}\Microsoft Shared\MSEnv\VSLauncher.
 Set-Alias dnvm dnvm.cmd
 function vse { & devenv /edit $args }
 
-$private:VsVersionYears = @(2010, 2012, 2013, 2015)
-$private:VsVersionNumbers = @(10, 11, 12, 14)
+$private:VsVersionYears = @(2010, 2012, 2013, 2015, 2017)
+$private:VsVersionNumbers = @(10, 11, 12, 14, 15)
 $private:index = 0
 foreach ($private:ver in $VsVersionNumbers) {
     $private:year = $VsVersionYears[$index]

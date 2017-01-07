@@ -11,6 +11,8 @@ Set-Alias vsl "${env:CommonProgramFiles(x86)}\Microsoft Shared\MSEnv\VSLauncher.
 Set-Alias dnvm dnvm.cmd
 function vse { & devenv /edit $args }
 
+$env:VS150COMNTOOLS = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\"
+
 $private:VsVersionYears = @(2010, 2012, 2013, 2015, 2017)
 $private:VsVersionNumbers = @(10, 11, 12, 14, 15)
 $private:index = 0
@@ -37,7 +39,14 @@ if ($UserSettings.DefaultVisualStudioVersion) {
 }
 
 Write-Host " Setting environment for using Microsoft Visual $year Studio Tools."
-Import-VisualStudioVars "$($ver)0"
+if ($year -ge 2017)
+{
+    & (Join-Path $env:VS150COMNTOOLS "VsDevCmd.bat")
+}
+else
+{
+    Import-VisualStudioVars "$($ver)0"
+}
 
 # MSBuild properties
 $env:Platform="AnyCPU"

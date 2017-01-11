@@ -21,7 +21,8 @@
         $FilePath = '*'
     }
 
-    dir -Recurse -Path $FilePath -Filter $FileName | % FullName | % {
+    # ErrorAction is set to Ignore for errors on long paths
+    dir -Recurse -Path $FilePath -Filter $FileName -ErrorAction Ignore | % FullName | % {
         if ($Relative) {
             % { '.' + $_.Substring($PWD.ProviderPath.Length) }
         }

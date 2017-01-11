@@ -3,7 +3,7 @@
 
 $UserSettings = @{
     ProjectPath = "Dev:\src\MyProject"
-    DefaultVisualStudioVersion = 2015
+    DefaultVisualStudioVersion = 2017
 }
 
 function Set-ProjectPath([IO.DirectoryInfo] $path)

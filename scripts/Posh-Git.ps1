@@ -2,8 +2,7 @@
 
 Push-Location $env:USERPROFILE\AppData\Local\GitHub\PortableGit_* -ErrorAction SilentlyContinue
 if (!$?) {
-    Write-Warning "`n posh-git not found. Skipped loading posh-git module.`n"
-    Pop-Location
+    Write-Warning "`n PortableGit not found.`n"
     exit 99
 }
 $env:GitPath = Get-Location
@@ -13,7 +12,11 @@ Add-PathVariable $env:GitPath\cmd, $env:GitPath\bin
 
 Set-Alias GitHub "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\GitHub, Inc\GitHub.appref-ms"
 
-Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_*
+Push-Location $env:USERPROFILE\AppData\Local\GitHub\PoshGit_* -ErrorAction SilentlyContinue
+if (!$?) {
+    Write-Warning "`n posh-git not found. Could not load posh-git module. Try opening PowerShell from GitHub client to create the PoshGit directory.`n"
+    exit 99
+}
 $env:PoshGitPath = Get-Location
 
 #region Partially borrowed from $env:PoshGitPath\profile.example.ps1

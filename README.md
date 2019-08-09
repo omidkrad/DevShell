@@ -7,6 +7,7 @@ DevShell is a custom developer shell for Windows
 mkdir C:\dev
 git clone https://github.com/omidkrad/DevShell C:\dev\shell
 Install-Package Pscx -source PSGallery
+Install-Module Find-String
 Install-Package GitHub -source chocolatey
 Install-Package ConEmu -source chocolatey
 ```
